@@ -1,0 +1,61 @@
+plugins {
+    id 'me.champeau.gradle.jmh' version '0.3.0'
+    id "com.zoltu.kotlin" version "1.0.1"
+}
+
+apply plugin: 'java'
+apply plugin: 'scala'
+apply plugin: 'idea'
+
+sourceSets.main.scala.srcDirs = ['src/main/scala', 'src/main/java']
+sourceSets.main.java.srcDirs = []
+
+group 'flamurey'
+version '0.1.0'
+
+//sourceCompatibility = 1.8
+//targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib:1.0.1"
+    compile 'org.scala-lang:scala-library:2.11.1'
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+
+jmh {
+    include = 'benchmark.FibonacciBenchmark'
+
+    benchmarkMode = 'avgt' // Benchmark mode. Available modes are: [Throughput/thrpt, AverageTime/avgt, SampleTime/sample, SingleShotTime/ss, All/all]
+//    batchSize = 10000000 // Batch size: number of benchmark method calls per operation. (some benchmark modes can ignore this setting)
+    fork = 0
+    timeUnit = 'ms' // Output time unit. Available time units are: [m, s, ms, us, ns].
+    failOnError = true
+
+    iterations = 3 // Number of measurement iterations to do.
+    timeOnIteration = '5s' // Time to spend at each measurement iteration.
+
+    warmupIterations = 3 // Number of warmup iterations to do.
+    warmup = '5s' // Time to spend at each warmup iteration.
+
+//    warmupBatchSize = 10 // Warmup batch size: number of benchmark method calls per operation.
+//    warmupForks = 0 // How many warmup forks to make for a single benchmark. 0 to disable warmup forks.
+
+    warmupMode = 'INDI' // Warmup mode for warming up selected benchmarks. Warmup modes are: [INDI, BULK, BULK_INDI].
+//    warmupBenchmarks = ['.*Warmup'] // Warmup benchmarks to include in the run in addition to already selected. JMH will not measure these benchmarks, but only use them for the warmup.
+
+    //    synchronizeIterations = false // Synchronize iterations?
+//    threads = 4 // Number of worker threads to run with.
+//    threadGroups = [2,3,4] //Override thread group distribution for asymmetric benchmarks.
+//    timeout = '3s' // Timeout for benchmark iteration.
+
+    profilers = ['gc'] // Use profilers to collect additional data.
+    forceGC = true
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.11'
+}

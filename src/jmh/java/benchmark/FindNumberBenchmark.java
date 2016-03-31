@@ -3,14 +3,12 @@ package benchmark;
 import jmh.JCreateList;
 import jmh.JNumberFinder;
 import jmh.KNumberFinder;
-import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.Scope;
-import org.openjdk.jmh.annotations.Setup;
-import org.openjdk.jmh.annotations.State;
+import org.openjdk.jmh.annotations.*;
 
 import java.util.List;
 
 @State(Scope.Benchmark)
+@BenchmarkMode(Mode.AverageTime)
 public class FindNumberBenchmark {
 
     int number;

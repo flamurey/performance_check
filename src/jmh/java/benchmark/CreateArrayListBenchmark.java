@@ -2,15 +2,13 @@ package benchmark;
 
 import jmh.JCreateList;
 import jmh.KCreateList;
-import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.Scope;
-import org.openjdk.jmh.annotations.Setup;
-import org.openjdk.jmh.annotations.State;
+import org.openjdk.jmh.annotations.*;
 
 import java.util.List;
 import java.util.function.IntFunction;
 
 @State(Scope.Benchmark)
+@BenchmarkMode(Mode.AverageTime)
 public class CreateArrayListBenchmark {
 
     int data[];

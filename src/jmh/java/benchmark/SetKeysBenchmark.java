@@ -1,13 +1,11 @@
 package benchmark;
 
-import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.Scope;
-import org.openjdk.jmh.annotations.Setup;
-import org.openjdk.jmh.annotations.State;
+import org.openjdk.jmh.annotations.*;
 
 import java.util.*;
 
 @State(Scope.Benchmark)
+@BenchmarkMode(Mode.Throughput)
 public class SetKeysBenchmark {
 
     private HashSet<String> hashSet;
@@ -24,7 +22,8 @@ public class SetKeysBenchmark {
     }
 
     String key() {
-        return data.get(random.nextInt(data.size()));
+        String key = data.get(random.nextInt(data.size()));
+        return new String(key);
     }
 
     @Benchmark

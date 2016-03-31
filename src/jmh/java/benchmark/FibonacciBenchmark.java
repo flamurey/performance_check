@@ -3,11 +3,10 @@ package benchmark;
 import jmh.JFibonacci;
 import jmh.KFibonacci;
 import jmh.Scala;
-import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.Scope;
-import org.openjdk.jmh.annotations.State;
+import org.openjdk.jmh.annotations.*;
 
 @State(Scope.Benchmark)
+@BenchmarkMode(Mode.Throughput)
 public class FibonacciBenchmark {
     int n = 100000;
 

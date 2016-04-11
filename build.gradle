@@ -27,7 +27,7 @@ dependencies {
 }
 
 jmh {
-    include = 'benchmark.concurrent.CounterBenchmark'
+    include = 'benchmark.func.CurryBenchmark'
 
 //    benchmarkMode = 'avgt' //  [Throughput/thrpt, AverageTime/avgt, SampleTime/sample, SingleShotTime/ss, All/all]
 //    batchSize = 10000000

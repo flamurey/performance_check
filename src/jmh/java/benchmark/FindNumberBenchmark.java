@@ -58,4 +58,9 @@ public class FindNumberBenchmark {
     public int kotlinByStream() {
         return KNumberFinder.Companion.findByStream(data, number);
     }
+
+    @Benchmark
+    public int kotlinByLazySequence() {
+        return KNumberFinder.Companion.findByLazySequence(data, number);
+    }
 }

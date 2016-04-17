@@ -8,8 +8,15 @@ class KNumberFinder {
       .filter { it < number }
       .sum()
 
+    /*
+    performance issue: spread operator '*' compiled into Arrays.copy
+     */
     fun findByStream(data: IntArray, number: Int): Int = IntStream.of(*data)
       .filter { it < number }
       .sum()
+
+    fun findByLazySequence(data: IntArray, number: Int): Int = data.asSequence()
+            .filter { it < number }
+            .sum()
   }
 }

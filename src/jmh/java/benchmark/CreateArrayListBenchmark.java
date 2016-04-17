@@ -5,7 +5,6 @@ import jmh.KCreateList;
 import org.openjdk.jmh.annotations.*;
 
 import java.util.List;
-import java.util.function.IntFunction;
 
 @State(Scope.Benchmark)
 @BenchmarkMode(Mode.AverageTime)

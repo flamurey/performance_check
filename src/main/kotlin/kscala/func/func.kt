@@ -2,7 +2,7 @@ package kscala.func
 
 object func {
     fun <T> isSorted(array: Array<T>, ordered: (T, T) -> Boolean): Boolean {
-        fun loop(index: Int): Boolean =
+       tailrec fun loop(index: Int): Boolean =
                 if (index >= array.size - 1) true
                 else if (ordered(array[index], array[index + 1])) loop(index + 1)
                 else false

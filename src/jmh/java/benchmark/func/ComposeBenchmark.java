@@ -1,5 +1,7 @@
 package benchmark.func;
 
+import jscala.func.F1;
+import jscala.func.Func;
 import kotlin.jvm.functions.Function1;
 import kscala.func.func;
 import org.openjdk.jmh.annotations.*;
@@ -37,5 +39,20 @@ public class ComposeBenchmark {
     @Benchmark
     public Object kotlinCompose() {
         return func.INSTANCE.compose(kDouble, kAbs).invoke(x);
+    }
+
+    F1<Integer, Integer> jDouble = (v1) -> v1 * 2;
+    F1<Integer, Integer> jAbs = (v1) -> v1 < 0 ? -v1 : v1;
+
+    @Benchmark
+    public Object javaCompose() {
+        return Func.compose(jDouble, jAbs).apply(x);
+    }
+
+    @TearDown(Level.Trial)
+    public void check() {
+        assert 6 == (Integer) package$.MODULE$.compose(sDouble, sAbs).apply(x);
+        assert 6 == func.INSTANCE.compose(kDouble, kAbs).invoke(x);
+        assert 6 == Func.compose(jDouble, jAbs).apply(x);
     }
 }

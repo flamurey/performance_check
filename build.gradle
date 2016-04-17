@@ -34,6 +34,7 @@ jmh {
     fork = 1
     timeUnit = 'ms' // Output time unit. Available time units are: [m, s, ms, us, ns].
     failOnError = true
+    jvmArgs = "-ea"
 
     iterations = 3
     timeOnIteration = '5s'

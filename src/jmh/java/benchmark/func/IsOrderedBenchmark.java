@@ -1,10 +1,13 @@
 package benchmark.func;
 
+import gscala.func.GFunc;
 import kotlin.jvm.functions.Function2;
 import kscala.func.func;
 import org.openjdk.jmh.annotations.*;
 import scala.func.package$;
 import scala.runtime.AbstractFunction2;
+
+import java.util.function.BiFunction;
 
 @State(Scope.Benchmark)
 @BenchmarkMode(Mode.Throughput)
@@ -29,6 +32,13 @@ public class IsOrderedBenchmark {
     @Benchmark
     public boolean kotlinIsOrdered() {
         return func.INSTANCE.isSorted(array, kotlinOrdered);
+    }
+
+    BiFunction<Integer, Integer, Boolean> groovyIsOrdered = (v1, v2) -> v1 <= v2;
+
+    @Benchmark
+    public boolean groovyIsOrdered() {
+        return GFunc.isSorted(array, groovyIsOrdered);
     }
 
 }

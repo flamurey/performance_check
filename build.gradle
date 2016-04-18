@@ -6,6 +6,7 @@ plugins {
 apply plugin: 'java'
 apply plugin: 'scala'
 apply plugin: 'idea'
+apply plugin: 'groovy'
 
 sourceSets.main.scala.srcDirs = ['src/main/scala', 'src/main/java']
 sourceSets.main.java.srcDirs = []
@@ -21,13 +22,14 @@ repositories {
 }
 
 dependencies {
+    compile localGroovy()
     compile "org.jetbrains.kotlin:kotlin-stdlib:1.0.1"
     compile 'org.scala-lang:scala-library:2.12.0-M4'
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }
 
 jmh {
-    include = 'benchmark.func.ComposeBenchmark'
+    include = 'benchmark.func.IsOrderedBenchmark'
 
 //    benchmarkMode = 'avgt' //  [Throughput/thrpt, AverageTime/avgt, SampleTime/sample, SingleShotTime/ss, All/all]
 //    batchSize = 10000000

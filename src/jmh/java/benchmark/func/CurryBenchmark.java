@@ -5,7 +5,7 @@ import jscala.func.Func;
 import kotlin.jvm.functions.Function2;
 import kscala.func.func;
 import org.openjdk.jmh.annotations.*;
-import scala.func.package$;
+import scala.func.SFunc$;
 import scala.runtime.AbstractFunction2;
 
 @State(Scope.Benchmark)
@@ -24,7 +24,7 @@ public class CurryBenchmark {
 
     @Benchmark
     public Integer scalaCurry() {
-        return package$.MODULE$.curry(scalaSum).apply(x).apply(y);
+        return SFunc$.MODULE$.curry(scalaSum).apply(x).apply(y);
     }
 
     //kotlin
@@ -45,7 +45,7 @@ public class CurryBenchmark {
 
     @TearDown(Level.Trial)
     public void check() {
-        assert 3 == package$.MODULE$.curry(scalaSum).apply(x).apply(y);
+        assert 3 == SFunc$.MODULE$.curry(scalaSum).apply(x).apply(y);
         assert 3 == func.INSTANCE.curry(kotlinSum).invoke(x).invoke(y);
         assert 3 == Func.curry(jSum).apply(x).apply(y);
     }

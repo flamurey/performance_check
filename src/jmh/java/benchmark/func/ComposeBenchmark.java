@@ -5,7 +5,7 @@ import jscala.func.Func;
 import kotlin.jvm.functions.Function1;
 import kscala.func.func;
 import org.openjdk.jmh.annotations.*;
-import scala.func.package$;
+import scala.func.SFunc$;
 import scala.runtime.AbstractFunction1;
 
 @State(Scope.Benchmark)
@@ -29,7 +29,7 @@ public class ComposeBenchmark {
 
     @Benchmark
     public Object scalaCompose() {
-        return package$.MODULE$.compose(sDouble, sAbs).apply(x);
+        return SFunc$.MODULE$.compose(sDouble, sAbs).apply(x);
     }
 
     Function1<Integer, Integer> kDouble = (v1) -> v1 * 2;
@@ -51,7 +51,7 @@ public class ComposeBenchmark {
 
     @TearDown(Level.Trial)
     public void check() {
-        assert 6 == (Integer) package$.MODULE$.compose(sDouble, sAbs).apply(x);
+        assert 6 == (Integer) SFunc$.MODULE$.compose(sDouble, sAbs).apply(x);
         assert 6 == func.INSTANCE.compose(kDouble, kAbs).invoke(x);
         assert 6 == Func.compose(jDouble, jAbs).apply(x);
     }

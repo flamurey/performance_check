@@ -4,7 +4,7 @@ import gscala.func.GFunc;
 import kotlin.jvm.functions.Function2;
 import kscala.func.func;
 import org.openjdk.jmh.annotations.*;
-import scala.func.package$;
+import scala.func.SFunc$;
 import scala.runtime.AbstractFunction2;
 
 import java.util.function.BiFunction;
@@ -26,7 +26,7 @@ public class IsOrderedBenchmark {
 
     @Benchmark
     public boolean scalaIsOrdered() {
-        return package$.MODULE$.isSorted(array, scalaOrdered);
+        return SFunc$.MODULE$.isSorted(array, scalaOrdered);
     }
 
     @Benchmark

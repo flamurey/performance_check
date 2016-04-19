@@ -1,6 +1,6 @@
-package scala
+package scala.func
 
-package object func {
+object SFunc {
   def isSorted[A](as: Array[A], ordered: (A, A) => Boolean): Boolean = {
     def loop(index: Int): Boolean =
       if (index >= as.length - 1) true

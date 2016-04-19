@@ -10,7 +10,10 @@ object func {
     }
 
     fun <A, B, C> curry(f: (A, B) -> C): (A) -> (B) -> C =
-            { a: A -> { b: B -> f (a, b) } }
+            { a -> { b -> f (a, b) } }
+
+    fun <A, B, C> curryA(f: (A, B) -> C): (A) -> (B) -> C =
+            fun(a: A) = fun(b: B) = f (a, b)
 
     fun <A, B, C> uncurry(f: (A) -> (B) -> C) : (A, B) -> C =
             { a: A, b: B -> f(a)(b)}
@@ -34,4 +37,6 @@ fun main(args: Array<String>) {
     println("addToTwo + 2: " + addToTwo(2))
     val uncurried = func.uncurry(curried)
     println("uncurryed 1 + 2: " + uncurried(1, 2))
+
+    val s = sequenceOf(1, 2, 3, 4, 5)
 }

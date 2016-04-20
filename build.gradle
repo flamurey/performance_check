@@ -29,7 +29,7 @@ dependencies {
 }
 
 jmh {
-    include = 'benchmark.func.ListCreating'
+    include = 'benchmark.func.ListToString'
 
 //    benchmarkMode = 'avgt' //  [Throughput/thrpt, AverageTime/avgt, SampleTime/sample, SingleShotTime/ss, All/all]
 //    batchSize = 10000000

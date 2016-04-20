@@ -1,22 +1,40 @@
 package kscala.func
 
 sealed class List<out T> {
-    object Nil : List<Nothing>()
+    object Nil : List<Nothing>() {
+        override fun asString(delimiter: String, s: StringBuilder) = s.toString()
+    }
 
-    class Cons<out T>(val head: T, val tail: List<T>) : List<T>()
+    class Cons<out T>(val head: T, val tail: List<T>) : List<T>() {
+        override fun asString(delimiter: String, s: StringBuilder): String {
+            s.append(delimiter)
+            s.append(head)
+            return tail.asString(",", s)
+        }
+    }
 
     override fun toString(): String {
-        tailrec fun loop(delimeter: String, s: StringBuilder, l: List<T>): String =
-            when (l) {
-                is Nil -> s.toString()
-                is Cons<T> ->  {
-                    s.append(delimeter)
-                    s.append(l.head)
-                    loop(",", s, l.tail)
+        tailrec fun loop(delimiter: String, s: StringBuilder, l: List<T>): String =
+                when (l) {
+                    is Nil -> s.toString()
+                    is Cons<T> -> {
+                        s.append(delimiter)
+                        s.append(l.head)
+                        loop(",", s, l.tail)
+                    }
                 }
-            }
+
         val list = loop("", StringBuilder(), this)
         return "[$list]"
+    }
+
+    abstract fun asString(delimiter: String, s: StringBuilder): String
+
+    fun toStringByOOP(): String = "[${asString("", StringBuilder())}]"
+
+    fun tail(): List<T> = when (this) {
+        is Nil -> Nil
+        is Cons<T> -> this.tail
     }
 
     companion object {
@@ -29,7 +47,15 @@ sealed class List<out T> {
     }
 }
 
+fun <T> List<T>.setHead(head: T): List<T> = when (this) {
+    is List.Nil -> List.Nil
+    is List.Cons -> List.Cons(head, this.tail)
+}
+
 fun main(args: Array<String>) {
     val l = List(1, 2, 3, 4, 5)
-    println(l.toString())
+    println(l.tail())
+    l.setHead("132")
+    println(l.setHead(l))
+    println(l.setHead(l).toStringByOOP())
 }

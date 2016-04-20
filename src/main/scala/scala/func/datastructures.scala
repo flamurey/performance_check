@@ -1,12 +1,20 @@
 package scala.func
 
-import scala.annotation.tailrec
+sealed trait List[+A] {
+  def tail(): List[A] = this match {
+    case Nil => Nil
+    case Cons(x, xs) => xs
+  }
 
-sealed trait List[+A]
+  def setHead[B >: A](newHead: B) = this match {
+    case Nil => Cons(newHead, Nil)
+    case Cons(x, xs) => Cons(newHead, xs)
+  }
+}
 
 case object Nil extends List[Nothing]
 
-case class Cons[+A](head: A, tail: List[A]) extends List[A]
+case class Cons[+A](head: A, listTail: List[A]) extends List[A]
 
 object List {
   def sum(ints: List[Int]): Int = ints match {
@@ -25,7 +33,7 @@ object List {
     else Cons(as.head, apply(as.tail: _*))
 
   def apply2[A](as: Array[A]): List[A] = {
-    def loop(acc: List[A], index: Int) : List[A] =
+    def loop(acc: List[A], index: Int): List[A] =
       if (index < 0) acc
       else loop(Cons(as(index), acc), index - 1)
     loop(Nil, as.length - 1)
@@ -34,12 +42,9 @@ object List {
 
 object A {
   def main(args: Array[String]) {
-    val x = List(1, 2, 3, 4, 5) match {
-      case Cons(x, Cons(2, Cons(4, _))) => x
-      case Nil => 42
-      case Cons(x, Cons(y, Cons(3, Cons(4, _)))) => x + y
-      case Cons(h, t) => h + List.sum(t)
-      case _ => 101
-    }
+    val l = List(1, 2, 3, 4, 5)
+    println(l.tail())
+    l.setHead("132")
+    println(l.setHead(l))
   }
 }

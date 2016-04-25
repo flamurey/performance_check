@@ -25,36 +25,6 @@ public class FindNumberBenchmark {
     }
 
     @Benchmark
-    public int javaByForCicle() {
-        return JNumberFinder.findByForCicle(data, number);
-    }
-
-    @Benchmark
-    public int javaByIntStream() {
-        return JNumberFinder.findByIntStream(data, number);
-    }
-
-    @Benchmark
-    public int javaByIntStreamWithLambda() {
-        return JNumberFinder.findByIntStreamWithLambda(data, number);
-    }
-
-    @Benchmark
-    public int javaByTypedStream() {
-        return JNumberFinder.findByTypedStream(dataWrapped, number);
-    }
-
-    @Benchmark
-    public int javaByListAndLambda() {
-        return JNumberFinder.findByListAndLambda(listData, number);
-    }
-
-    @Benchmark
-    public int kotlinByListAndLambda() {
-        return KNumberFinder.Companion.findByListAndLambda(listData, number);
-    }
-
-    @Benchmark
     public int kotlinByStream() {
         return KNumberFinder.Companion.findByStream(data, number);
     }

@@ -1,5 +1,6 @@
 package benchmark;
 
+import jmh.FibonacciLogN;
 import jmh.JFibonacci;
 import jmh.KFibonacci;
 import jmh.Scala;
@@ -23,6 +24,11 @@ public class FibonacciBenchmark {
     @Benchmark
     public long javaFastLoop() {
         return JFibonacci.fastLoop(n, 0, 1);
+    }
+
+    @Benchmark
+    public long javaLogN() {
+        return FibonacciLogN.get(n);
     }
 
     @Benchmark

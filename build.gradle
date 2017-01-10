@@ -29,11 +29,11 @@ dependencies {
 }
 
 jmh {
-    include = 'benchmark.FibonacciBenchmark'
+    include = 'benchmark.concurrent.ConsumerProducer'
 
 //    benchmarkMode = 'avgt' //  [Throughput/thrpt, AverageTime/avgt, SampleTime/sample, SingleShotTime/ss, All/all]
 //    batchSize = 10000000
-    fork = 1
+    fork = 0
     timeUnit = 'ms' // Output time unit. Available time units are: [m, s, ms, us, ns].
     failOnError = true
     jvmArgs = "-ea"
@@ -50,7 +50,7 @@ jmh {
     warmupMode = 'INDI' //  Warmup modes are: [INDI, BULK, BULK_INDI].
 
     //    synchronizeIterations = false // Synchronize iterations?
-//    threads = 4 // Number of worker threads to run with.
+    threads = 1 // Number of worker threads to run with.
 //    threadGroups = [2,3,4] //Override thread group distribution for asymmetric benchmarks.
 //    timeout = '3s' // Timeout for benchmark iteration.
 

@@ -1,4 +1,4 @@
-package jmh.concurrent;
+package jmh.concurrent.counting;
 
 import java.time.LocalTime;
 import java.util.function.Supplier;

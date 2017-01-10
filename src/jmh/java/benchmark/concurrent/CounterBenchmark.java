@@ -1,8 +1,8 @@
 package benchmark.concurrent;
 
-import jmh.concurrent.CasCounter;
-import jmh.concurrent.LockerSyncCounter;
-import jmh.concurrent.MethodSyncCounter;
+import jmh.concurrent.counting.CasCounter;
+import jmh.concurrent.counting.LockerSyncCounter;
+import jmh.concurrent.counting.MethodSyncCounter;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Group;
 import org.openjdk.jmh.annotations.Scope;
